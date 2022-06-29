@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
 use App\Http\Controllers\RegisterController;
@@ -29,13 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('dashboard');
 	})->name('dashboard');
 
-	Route::get('profile', function () {
-		return view('profile');
-	})->name('profile');
-
-	Route::get('employee-management', function () {
-		return view('laravel-examples/user-management');
-	})->name('user-management');
+	Route::get('employee-management', [EmployeeController::class, 'index'])->name('user-management');
 
 	Route::get('/logout', [SessionsController::class, 'destroy']);
 	Route::get('/user-profile', [InfoUserController::class, 'create']);

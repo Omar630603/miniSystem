@@ -55,4 +55,17 @@ class EmployeeController extends Controller
             return redirect('/employee-management');
         }
     }
+    //delete employee
+    public function destroy($id)
+    {
+        $employee = Employee::find($id);
+        $employee->delete();
+        if ($employee) {
+            Session::flash('success', 'Employee deleted successfully');
+            return redirect('/employee-management');
+        } else {
+            Session::flash('error', 'Employee deleted failed');
+            return redirect('/employee-management');
+        }
+    }
 }

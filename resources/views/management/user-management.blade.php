@@ -228,7 +228,15 @@
                                             <i class="fas fa-user-edit text-secondary"></i>
                                         </a>
                                         <span>
-                                            <i class="cursor-pointer fas fa-trash text-secondary"></i>
+                                            <a
+                                                onclick="document.getElementById('deleteEmployee{{$employee->id}}').submit();"><i
+                                                    class="cursor-pointer fas fa-trash text-secondary"></i></a>
+                                            <form hidden action="{{ route('deleteEmployee', ['id'=>$employee->id]) }}"
+                                                id="deleteEmployee{{$employee->id}}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="hidden" name="id" value="{{$employee->id}}">
+                                            </form>
                                         </span>
                                     </td>
                                 </tr>

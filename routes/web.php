@@ -31,6 +31,8 @@ Route::group(['middleware' => 'auth'], function () {
 	})->name('dashboard');
 
 	Route::get('employee-management', [EmployeeController::class, 'index'])->name('user-management');
+	Route::post('employee-management/add', [EmployeeController::class, 'add'])->name('addEmployee');
+	Route::put('employee-management/update/{id}', [EmployeeController::class, 'update'])->name('editEmployee');
 
 	Route::get('/logout', [SessionsController::class, 'destroy']);
 	Route::get('/user-profile', [InfoUserController::class, 'create']);

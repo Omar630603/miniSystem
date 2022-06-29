@@ -153,8 +153,77 @@
                                             {{date('d-M-Y', strtotime($employee->tanggal_bergabung))}}
                                         </p>
                                     </td>
-                                    <td class="text-center">
-                                        <a href="#" class="mx-3" data-bs-toggle="tooltip"
+                                    <td class="text-left">
+                                        <div class="modal fade" id="editEmployee{{$employee->id}}"
+                                            data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                            aria-labelledby="Edit {{$employee->id}} Employee" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="editEmployee{{$employee->id}}">Edit
+                                                            {{$employee->nama}}
+                                                            Employee
+                                                        </h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        {{-- form to edit employee --}}
+                                                        <form
+                                                            action="{{ route('editEmployee', ['id'=>$employee->id]) }}"
+                                                            id="editEmployeeForm{{$employee->id}}" method="POST">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <div class="mb-2">
+                                                                <label for="nomorInduk" class="form-label">Nomor
+                                                                    Induk</label>
+                                                                <input type="text" class="form-control" id="nomorInduk"
+                                                                    aria-describedby="nomorInduk" name="nomor_induk"
+                                                                    value="{{$employee->nomor_induk}}">
+                                                            </div>
+                                                            <div class="mb-2">
+                                                                <label for="nama" class="form-label">Name</label>
+                                                                <input type="text" class="form-control" id="nama"
+                                                                    aria-describedby="nama" name="nama"
+                                                                    value="{{$employee->nama}}">
+                                                            </div>
+                                                            <div class="mb-2">
+                                                                <label for="alamat" class="form-label">Address</label>
+                                                                <input type="text" class="form-control" id="alamat"
+                                                                    aria-describedby="alamat" name="alamat"
+                                                                    value="{{$employee->alamat}}">
+                                                            </div>
+                                                            <div class="mb-2">
+                                                                <label for="tanggal_lahir" class="form-label">Tanggal
+                                                                    Lahir</label>
+                                                                <input type="date" class="form-control"
+                                                                    id="tanggal_lahir" aria-describedby="tanggal_lahir"
+                                                                    name="tanggal_lahir"
+                                                                    value="{{$employee->tanggal_lahir}}">
+                                                            </div>
+                                                            <div class="mb-2">
+                                                                <label for="tanggal_bergabung"
+                                                                    class="form-label">Tanggal
+                                                                    Bergabung</label>
+                                                                <input type="date" class="form-control"
+                                                                    id="tanggal_bergabung"
+                                                                    aria-describedby="tanggal_bergabung"
+                                                                    name="tanggal_bergabung"
+                                                                    value="{{$employee->tanggal_bergabung}}">
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-sm btn-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                        <a onclick="document.getElementById('editEmployeeForm{{$employee->id}}').submit();"
+                                                            class="btn btn-sm btn-primary">Edit</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#" class="mx-3" data-bs-toggle="modal"
+                                            data-bs-target="#editEmployee{{$employee->id}}"
                                             data-bs-original-title="Edit {{$employee->nama}}">
                                             <i class="fas fa-user-edit text-secondary"></i>
                                         </a>
